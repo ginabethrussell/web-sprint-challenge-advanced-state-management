@@ -1,8 +1,53 @@
 
 export const initialState = {
+    smurfs: [], 
+    isLoading: false,
+    error: ''
 }
 
-const reducer = ()=>{
+const reducer = (state=initialState, action)=>{
+    switch(action.type) {
+        case GET_SMURFLIST_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case GET_SMURFLIST_SUCCESS: 
+            return {
+                ...state,
+                isLoading: false,
+                smurfs: action.payload,
+                error: ''
+            }
+        case GET_SMURFLIST_FAILURE:
+            return {
+                ...state, 
+                isLoading: false,
+                smurfs: [],
+                error: action.payload
+            }
+        case ADD_SMURF_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case ADD_SMURF_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                smurfs: [...state.smurfs, action.payload]
+            }
+        case ADD_SMURF_FAILURE: 
+            return {
+                ...state, 
+                isLoading:false,
+                error: action.payload
+            }
+        default:  return state
+    }
 }
 
 export default reducer;
