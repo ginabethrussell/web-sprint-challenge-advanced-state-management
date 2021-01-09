@@ -1,3 +1,7 @@
+//import action types
+
+import * as actions from '../actions';
+
 
 export const initialState = {
     smurfs: [], 
@@ -7,40 +11,40 @@ export const initialState = {
 
 const reducer = (state=initialState, action)=>{
     switch(action.type) {
-        case GET_SMURFLIST_START:
+        case actions.GET_SMURFLIST_START:
             return {
                 ...state,
                 isLoading: true,
                 error: ''
             }
-        case GET_SMURFLIST_SUCCESS: 
+        case actions.GET_SMURFLIST_SUCCESS: 
             return {
                 ...state,
                 isLoading: false,
                 smurfs: action.payload,
                 error: ''
             }
-        case GET_SMURFLIST_FAILURE:
+        case actions.GET_SMURFLIST_FAILURE:
             return {
                 ...state, 
                 isLoading: false,
                 smurfs: [],
                 error: action.payload
             }
-        case ADD_SMURF_START:
+        case actions.ADD_SMURF_START:
             return {
                 ...state,
                 isLoading: true,
                 error: ''
             }
-        case ADD_SMURF_SUCCESS:
+        case actions.ADD_SMURF_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 error: '',
                 smurfs: [...state.smurfs, action.payload]
             }
-        case ADD_SMURF_FAILURE: 
+        case actions.ADD_SMURF_FAILURE: 
             return {
                 ...state, 
                 isLoading:false,
