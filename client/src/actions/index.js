@@ -78,8 +78,15 @@ export const fetchSmurfs = () => (dispatch) => {
 }
 
 export const addSmurf = (smurf) => (dispatch) => {
+    console.log("adding new smurf to db", smurf)
     dispatch(addSmurfStart);
-    axios.post('localhost:3333/smurfs', smurf)
-    .then(response => console.log(response.data))
-    .catch(error => console.log(error))
+    axios.post('http://localhost:3333/smurfs', smurf)
+    .then(response => {
+        console.log(response.data);
+        dispatch(addSmurfSuccess(response.data))
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(addSmurfFailure(error));
+    })
 }
