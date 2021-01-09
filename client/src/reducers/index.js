@@ -12,12 +12,14 @@ export const initialState = {
 const reducer = (state=initialState, action)=>{
     switch(action.type) {
         case actions.GET_SMURFLIST_START:
+            console.log('in reducer- start')
             return {
                 ...state,
                 isLoading: true,
                 error: ''
             }
-        case actions.GET_SMURFLIST_SUCCESS: 
+        case actions.GET_SMURFLIST_SUCCESS:
+            console.log('in reducer- success') 
             return {
                 ...state,
                 isLoading: false,
@@ -25,6 +27,7 @@ const reducer = (state=initialState, action)=>{
                 error: ''
             }
         case actions.GET_SMURFLIST_FAILURE:
+            console.log('in reducer- failure') 
             return {
                 ...state, 
                 isLoading: false,
