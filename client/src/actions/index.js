@@ -21,6 +21,7 @@ export const GET_SMURFLIST_FAILURE = 'GET_SMURFLIST_FAILURE';
 export const ADD_SMURF_START = 'ADD_SMURF_START';
 export const ADD_SMURF_SUCCESS = 'ADD_SMURF_SUCCESS';
 export const ADD_SMURF_FAILURE = 'ADD_SMURF_FAILURE';
+export const UPDATE_FORM_ERROR = "UPDATE_FORM_ERROR";
 
 
 export const getSmurflistStart = () => {
@@ -89,4 +90,11 @@ export const addSmurf = (smurf) => (dispatch) => {
         console.log(error);
         dispatch(addSmurfFailure(error));
     })
+}
+
+export const updateFormError = (error) => {
+    return {
+        type: "UPDATE_FORM_ERROR",
+        payload: error
+    }
 }

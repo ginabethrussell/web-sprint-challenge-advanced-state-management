@@ -53,6 +53,12 @@ const reducer = (state=initialState, action)=>{
                 isLoading:false,
                 error: action.payload
             }
+        case actions.UPDATE_FORM_ERROR: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
         default:  return state
     }
 }
