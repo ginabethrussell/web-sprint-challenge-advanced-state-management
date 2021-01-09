@@ -24,7 +24,17 @@ class AddForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        // check if smurf with same name exists and return with error message
+        const checkName = this.props.smurfs.filter(smurf => smurf.name === this.state.name);
+        if (checkName.length > 0){
+            this.setState({
+                ...this.state,
+                error: "smurf name already assigned"
+            })
+            return
+        }
         console.log('submitting new smurf', this.state);
+        // check to see if needed form fields are empty and display error
         if (this.state.name === '' ){
             this.setState({
                 ...this.state,
@@ -99,9 +109,14 @@ class AddForm extends React.Component {
         </section>);
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        smurfs: state.smurfs
+    }
+}
 const mapDispatchToProps = {addSmurf};
 
-export default connect(null, mapDispatchToProps)(AddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
