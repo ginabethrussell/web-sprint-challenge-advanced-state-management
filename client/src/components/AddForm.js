@@ -24,7 +24,7 @@ class AddForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // check if smurf with same name exists and return with error message
+        //check if smurf with same name exists and return with error message
         const checkName = this.props.smurfs.filter(smurf => smurf.name === this.state.name);
         if (checkName.length > 0){
             this.setState({
@@ -67,6 +67,21 @@ class AddForm extends React.Component {
                 error: ''
             })
         }
+        // const newSmurf = {
+        //     id: Date.now(),
+        //     name: this.state.name,
+        //     position: this.state.position,
+        //     nickname: this.state.nickname,
+        //     description: this.state.description
+        // }
+        // this.props.addSmurf(newSmurf);
+        // this.setState({
+        //     name: '',
+        //     position: '',
+        //     nickname: '',
+        //     description: '',
+        //     error: ''
+        // })
         
     }
     render() {
@@ -111,7 +126,8 @@ class AddForm extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        smurfs: state.smurfs
+        smurfs: state.smurfs,
+        error: state.error
     }
 }
 const mapDispatchToProps = {addSmurf};
