@@ -13,3 +13,88 @@ import axios from 'axios';
 //3. Add set error text action:
 //              - return action object setting error text
 //4. Any other actions you deem nessiary to complete application.
+
+// Create action types
+export const GET_SMURFLIST_START = 'GET_SMURFLIST_START';
+export const GET_SMURFLIST_SUCCESS = 'GET_SMURFLIST_SUCCESS';
+export const GET_SMURFLIST_FAILURE = 'GET_SMURFLIST_FAILURE';
+export const ADD_SMURF_START = 'ADD_SMURF_START';
+export const ADD_SMURF_SUCCESS = 'ADD_SMURF_SUCCESS';
+export const ADD_SMURF_FAILURE = 'ADD_SMURF_FAILURE';
+export const UPDATE_FORM_ERROR = "UPDATE_FORM_ERROR";
+
+
+export const getSmurflistStart = () => {
+    return {
+        type: GET_SMURFLIST_START
+    }
+}
+
+export const getSmurflistSuccess = (smurfs) => {
+    return {
+        type: GET_SMURFLIST_SUCCESS,
+        payload: smurfs
+    }
+}
+
+export const getSmurflistFailure = (error) => {
+    return {
+        type: GET_SMURFLIST_FAILURE,
+        payload: error
+    }
+}
+
+export const addSmurfStart= () => {
+    return {
+        type: ADD_SMURF_START
+    }
+}
+
+export const addSmurfSuccess = (smurfs) => {
+    return {
+        type: ADD_SMURF_SUCCESS,
+        payload: smurfs
+    }
+}
+
+export const addSmurfFailure = (error) => {
+    return {
+        type: ADD_SMURF_FAILURE,
+        payload: error
+    }
+}
+
+export const fetchSmurfs = () => (dispatch) => {
+    console.log("in async action")
+    dispatch(getSmurflistStart);
+    axios.get('http://localhost:3333/smurfs')
+    .then(response => {
+        console.log(response.data);
+        dispatch(getSmurflistSuccess(response.data))
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(getSmurflistFailure(error))
+    })
+}
+
+export const addSmurf = (smurf) => (dispatch) => {
+    console.log("adding new smurf to db", smurf)
+    dispatch(addSmurfStart);
+    axios.post('http://localhost:3333/smurfs', smurf)
+    .then(response => {
+        console.log(response.data);
+        dispatch(addSmurfSuccess(response.data))
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(addSmurfFailure(error));
+    })
+}
+
+export const updateFormError = (error) => {
+    return {
+        type: "UPDATE_FORM_ERROR",
+        payload: error
+    }
+}
